@@ -351,3 +351,10 @@ nav a{font-size:10px}
 .entry{grid-template-columns:1fr;gap:2px}
 
 }
+
+.portrait img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}

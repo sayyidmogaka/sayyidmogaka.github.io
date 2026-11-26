@@ -38,8 +38,8 @@ function initHomepageDoodles() {
         pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
         canvas.width = Math.round(window.innerWidth * pixelRatio);
         canvas.height = Math.round(window.innerHeight * pixelRatio);
-        canvas.style.width = window.innerWidth + "px";
-        canvas.style.height = window.innerHeight + "px";
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
         context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
         context.lineCap = "round";
         context.lineJoin = "round";
@@ -112,10 +112,12 @@ function initHomepageDoodles() {
         context.clearRect(0, 0, window.innerWidth, window.innerHeight);
         const w = window.innerWidth;
         const h = window.innerHeight;
-        const scale = Math.min(1, Math.max(.58, w / 1250));
+        const scale = Math.min(1, Math.max(.48, w / 1250));
         if (w < 560) {
-            star(w * .12, h * .22, .65);
-            star(w * .88, h * .34, .65);
+            star(w * .10, h * .16, .55);
+            star(w * .90, h * .24, .55);
+            rocket(w * .08, h * .72, .55);
+            stickFigure(w * .91, h * .78, .55);
             return;
         }
         star(w * .10, h * .27, scale);

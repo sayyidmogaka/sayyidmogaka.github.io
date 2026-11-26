@@ -16,13 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initHomepageDoodles() {
-    const homePage = document.querySelector("[data-home-page]");
+    // The ink layer belongs exclusively to the homepage landing cover.
+    const homePage = document.querySelector("main[data-home-page]");
     if (!homePage) return;
 
     const canvas = document.createElement("canvas");
     canvas.className = "doodle-canvas";
+    canvas.dataset.homepageOnly = "true";
     canvas.setAttribute("aria-hidden", "true");
-    document.body.appendChild(canvas);
+    homePage.appendChild(canvas);
 
     const context = canvas.getContext("2d");
     if (!context) return;
@@ -169,7 +171,7 @@ function initHomepageDoodles() {
         context.clearRect(0, 0, window.innerWidth, window.innerHeight);
         drawDecorations();
     });
-    document.body.appendChild(clearButton);
+    homePage.appendChild(clearButton);
 
     window.addEventListener("resize", prepareContext, { passive: true });
     prepareContext();

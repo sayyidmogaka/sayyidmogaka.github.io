@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.year').forEach(e=>e.textContent=new Date().getFullYear());const b=document.querySelector('.toggle');if(b)b.addEventListener('click',()=>document.querySelector('.wrap').classList.toggle('menu-open'));});

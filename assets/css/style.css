@@ -164,6 +164,43 @@ img, svg { max-width: 100%; }
 .doodle-clear:hover { background: #eeeae3; transform: rotate(35deg); }
 .doodle-clear svg { width: 19px; height: 19px; fill: currentColor; }
 
+/* Quiet, accessible homepage-only design attribution. */
+.home-cover {
+  padding-bottom: clamp(82px, 10vh, 110px);
+}
+.home-attribution {
+  position: absolute;
+  z-index: 3;
+  right: 70px;
+  bottom: clamp(18px, 3vh, 28px);
+  left: 70px;
+  color: #667587;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: .015em;
+}
+.home-attribution a {
+  color: #355779;
+  text-decoration: underline;
+  text-decoration-color: rgba(53,87,121,.42);
+  text-underline-offset: 3px;
+}
+.home-attribution a:hover,
+.home-attribution a:focus-visible {
+  color: #17385e;
+  text-decoration-color: currentColor;
+}
+@media (max-width: 480px) {
+  .home-attribution {
+    right: 54px;
+    left: 54px;
+    bottom: 15px;
+    font-size: 10px;
+  }
+}
+
 /* Shared inner-page navigation, based on the second reference screenshot. */
 .inner-page-body { background: var(--paper); }
 .site-header {

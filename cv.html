@@ -52,7 +52,7 @@
 (function () {
   var url = "assets/docs/Sayyid_Mogaka_CV.pdf";
   fetch(url, { method: "HEAD", cache: "no-store" }).then(function (response) {
-    if (!response.ok || !(/application\\/pdf/i.test(response.headers.get("content-type") || ""))) return;
+    if (!response.ok || !(response.headers.get("content-type") || "").toLowerCase().includes("application/pdf")) return;
     document.getElementById("cv-actions").hidden = false;
     document.getElementById("cv-document-frame").hidden = false;
     document.getElementById("cv-document-help").hidden = false;

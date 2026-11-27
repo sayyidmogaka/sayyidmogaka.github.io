@@ -683,3 +683,48 @@ html[data-theme="dark"] .toggle { border-color:var(--line); }
 
 /* Ink and decorative doodles are independent layers; handwriting alone fades. */
 .doodle-ink { z-index: 1; touch-action: none; }
+
+/* Header CV action follows the social icons on every inner page. */
+.header-social .header-cv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  width: auto;
+  min-width: 35px;
+  min-height: 32px;
+  color: var(--ink);
+  font-family: var(--condensed);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.header-social .header-cv-link svg { width: 18px; height: 20px; }
+.header-social .header-cv-link:hover,
+.header-social .header-cv-link:focus-visible { color: #557da9; }
+.cv-document-panel { max-width: 100%; }
+.cv-document-panel .cv-panel-heading { margin-bottom: 20px; }
+.cv-document-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-bottom: 18px; }
+.cv-document-actions[hidden], .cv-document-frame[hidden], .cv-document-pending[hidden], .cv-document-help[hidden] { display: none !important; }
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  background: var(--ink);
+  color: var(--paper-light);
+  border-radius: 4px;
+  font-family: var(--condensed);
+  font-weight: 700;
+  font-size: 13px;
+}
+.cv-download-btn:hover { background: #315d8c; color: #fff; }
+.cv-document-frame { height: min(85vh, 1000px); min-height: 560px; border: 1px solid var(--line); background: white; border-radius: 4px; overflow: hidden; }
+.cv-document-frame iframe { width: 100%; height: 100%; border: 0; }
+.cv-document-pending { margin: 0; color: var(--ink-soft); }
+.cv-document-help { color: var(--muted); font-size: 13px; margin-top: 12px; }
+@media (max-width: 640px) {
+  .header-social .header-cv-link { min-width: 26px; gap: 2px; font-size: 11px; }
+  .header-social .header-cv-link svg { width: 16px; }
+  .cv-document-frame { height: 68vh; min-height: 420px; }
+}

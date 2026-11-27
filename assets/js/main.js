@@ -44,11 +44,13 @@ function initHomepageDoodles() {
     }
 
     const ink = "rgba(100, 155, 215, 0.65)";
-    const fadePerFrame = 0.006; // gently fade over several seconds at 60fps
+    const fadeDurationMs = 3200; // end each fade with a complete erase
+    const fadePerFrame = 0.022;
     let pixelRatio = 1;
     let isDrawing = false;
     let lastPoint = null;
     let lastFrame = null;
+    let fadeStartedAt = null;
 
     function prepareContext() {
         pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -66,6 +68,7 @@ function initHomepageDoodles() {
         drawingContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
         drawingContext.lineCap = "round";
         drawingContext.lineJoin = "round";
+        fadeStartedAt = null;
         drawDecorations();
     }
 
@@ -167,6 +170,7 @@ function initHomepageDoodles() {
         if (!homePage.contains(event.target) || isInteractiveTarget(event.target)) return;
         // Preserve normal navigation; only intercept interaction on the homepage.
         isDrawing = true;
+        fadeStartedAt = null;
         lastPoint = canvasPoint(event);
         drawingContext.beginPath();
         drawingContext.moveTo(...lastPoint);
@@ -185,6 +189,7 @@ function initHomepageDoodles() {
     }, { passive: false });
 
     function stopDrawing() {
+        if (isDrawing) fadeStartedAt = performance.now();
         isDrawing = false;
         lastPoint = null;
     }
@@ -192,20 +197,25 @@ function initHomepageDoodles() {
     document.addEventListener("pointercancel", stopDrawing);
     window.addEventListener("blur", stopDrawing);
 
-    // Eric Tramel's destination-out fading technique, adapted to fade only
-    // handwriting once the visitor stops drawing. Time-based opacity keeps
-    // the effect consistent on displays with different refresh rates.
+    // A destination-out fade alone approaches zero opacity asymptotically.
+    // Give handwriting a finite lifetime, then erase every remaining pixel.
+    // The permanent decorations live on a different canvas and are untouched.
     function fadeDrawing(frameTime) {
-        const elapsed = lastFrame === null ? 16.67 : Math.min(frameTime - lastFrame, 100);
+        const elapsed = lastFrame === null ? 16.67 : Math.max(0, Math.min(frameTime - lastFrame, 100));
         lastFrame = frameTime;
-        if (!isDrawing && elapsed > 0) {
-            const opacity = 1 - Math.pow(1 - fadePerFrame, elapsed / 16.67);
-            drawingContext.save();
-            drawingContext.setTransform(1, 0, 0, 1, 0, 0);
-            drawingContext.globalCompositeOperation = "destination-out";
-            drawingContext.fillStyle = `rgba(0, 0, 0, ${opacity})`;
-            drawingContext.fillRect(0, 0, drawingCanvas.width, drawingCanvas.height);
-            drawingContext.restore();
+        if (!isDrawing && fadeStartedAt !== null) {
+            if (frameTime - fadeStartedAt >= fadeDurationMs) {
+                drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+                fadeStartedAt = null;
+            } else if (elapsed > 0) {
+                const opacity = 1 - Math.pow(1 - fadePerFrame, elapsed / 16.67);
+                drawingContext.save();
+                drawingContext.setTransform(1, 0, 0, 1, 0, 0);
+                drawingContext.globalCompositeOperation = "destination-out";
+                drawingContext.fillStyle = `rgba(0, 0, 0, ${opacity})`;
+                drawingContext.fillRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+                drawingContext.restore();
+            }
         }
         requestAnimationFrame(fadeDrawing);
     }
@@ -217,6 +227,7 @@ function initHomepageDoodles() {
     clearButton.setAttribute("aria-label", "Clear drawings");
     clearButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A8 8 0 1 0 20 12h-2a6 6 0 1 1-1.76-4.24L13 11h7V4l-2.35 2.35Z"/></svg>';
     clearButton.addEventListener("click", () => {
+        fadeStartedAt = null;
         drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
         drawDecorations();
     });

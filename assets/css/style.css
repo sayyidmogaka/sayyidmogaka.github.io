@@ -679,3 +679,7 @@ html[data-theme="dark"] a[aria-label$="Swahili lessons on YouTube"] { background
 html[data-theme="dark"] a[aria-label$="Swahili lessons on YouTube"] span { color:var(--ink) !important; }
 html[data-theme="dark"] .toggle { border-color:var(--line); }
 @media(max-width:480px) { .header-right { gap:7px; } .header-right .theme-toggle { width:32px;height:32px;flex-basis:32px;padding:5px; } }
+
+
+/* Ink and decorative doodles are independent layers; handwriting alone fades. */
+.doodle-ink { z-index: 1; touch-action: none; }

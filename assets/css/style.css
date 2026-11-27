@@ -728,3 +728,76 @@ html[data-theme="dark"] .toggle { border-color:var(--line); }
   .header-social .header-cv-link svg { width: 16px; }
   .cv-document-frame { height: 68vh; min-height: 420px; }
 }
+
+/* Bio page: stronger icon contrast and a distinctive but restrained teal navigation. */
+.bio-page-body .site-header nav a {
+  color: #213b54;
+  transition: color .18s ease, background-color .18s ease;
+}
+.bio-page-body .site-header nav a:hover,
+.bio-page-body .site-header nav a:focus-visible {
+  color: #08785e;
+}
+.bio-page-body .site-header nav a.active {
+  color: #08785e;
+  font-weight: 700;
+}
+.bio-page-body .site-header nav a.active::after,
+.bio-page-body .site-header nav a:hover::after {
+  background: #08785e;
+}
+.bio-page-body .header-social > a,
+.bio-page-body .header-social .header-cv-link,
+.bio-page-body .header-name,
+.bio-page-body .header-right .theme-toggle,
+.bio-page-body .header-social .email-reveal > summary {
+  color: #193650 !important;
+}
+.bio-page-body .header-social > a:hover,
+.bio-page-body .header-social > a:focus-visible,
+.bio-page-body .header-social .header-cv-link:hover,
+.bio-page-body .header-social .header-cv-link:focus-visible,
+.bio-page-body .header-social .email-reveal > summary:hover,
+.bio-page-body .header-social .email-reveal > summary:focus-visible,
+.bio-page-body .header-right .theme-toggle:hover,
+.bio-page-body .header-right .theme-toggle:focus-visible {
+  color: #08785e !important;
+}
+.bio-page-body .header-social :is(a, summary, button):focus-visible,
+.bio-page-body .site-header nav a:focus-visible {
+  outline: 2px solid #08785e;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+html[data-theme="dark"] .bio-page-body .site-header nav a {
+  color: #d5e1ed;
+}
+html[data-theme="dark"] .bio-page-body .site-header nav a.active,
+html[data-theme="dark"] .bio-page-body .site-header nav a:hover,
+html[data-theme="dark"] .bio-page-body .site-header nav a:focus-visible {
+  color: #83e1c1;
+}
+html[data-theme="dark"] .bio-page-body .site-header nav a.active::after,
+html[data-theme="dark"] .bio-page-body .site-header nav a:hover::after {
+  background: #83e1c1;
+}
+html[data-theme="dark"] .bio-page-body .header-social > a,
+html[data-theme="dark"] .bio-page-body .header-social .header-cv-link,
+html[data-theme="dark"] .bio-page-body .header-name,
+html[data-theme="dark"] .bio-page-body .header-right .theme-toggle,
+html[data-theme="dark"] .bio-page-body .header-social .email-reveal > summary {
+  color: #e0e8f1 !important;
+}
+html[data-theme="dark"] .bio-page-body .header-social > a:hover,
+html[data-theme="dark"] .bio-page-body .header-social > a:focus-visible,
+html[data-theme="dark"] .bio-page-body .header-social .header-cv-link:hover,
+html[data-theme="dark"] .bio-page-body .header-social .header-cv-link:focus-visible,
+html[data-theme="dark"] .bio-page-body .header-social .email-reveal > summary:hover,
+html[data-theme="dark"] .bio-page-body .header-social .email-reveal > summary:focus-visible,
+html[data-theme="dark"] .bio-page-body .header-right .theme-toggle:hover {
+  color: #83e1c1 !important;
+}
+html[data-theme="dark"] .bio-page-body .header-social :is(a, summary, button):focus-visible,
+html[data-theme="dark"] .bio-page-body .site-header nav a:focus-visible {
+  outline-color: #83e1c1;
+}

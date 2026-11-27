@@ -637,3 +637,16 @@ p { margin: 0 0 20px; }
   .phd-handshake { width: 27px; height: 27px; flex-basis: 27px; }
   .email-popover { right: -42px; }
 }
+
+/* Use only the envelope as the email disclosure control, including on the landing page. */
+.home-social .email-reveal, .header-social .email-reveal { position: relative; display: inline-flex; align-items: center; }
+.email-reveal > summary { display: inline-flex; align-items: center; justify-content: center; list-style: none; cursor: pointer; }
+.email-reveal > summary::marker { content: ""; }
+.email-reveal > summary::-webkit-details-marker { display: none; }
+.email-reveal > summary:focus-visible { outline: 2px solid #557da9; outline-offset: 3px; }
+.home-social .email-reveal > summary:hover { color: #17385e; }
+.home-social .email-popover { top: calc(100% + 12px); right: auto; left: 50%; transform: translateX(-50%); text-align: left; }
+.home-social .email-popover a { display: inline-block; min-width: 0; min-height: 0; margin: 5px 0; font-size: 14px; font-weight: 700; color: #17385e; text-decoration: underline; overflow-wrap: anywhere; transform: none; }
+@media (max-width: 480px) {
+  .home-social .email-popover { position: fixed; top: 50%; left: 50%; right: auto; transform: translate(-50%, -50%); }
+}

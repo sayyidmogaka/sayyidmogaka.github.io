@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    initThemeToggle();
     initHomepageDoodles();
 });
 
@@ -29,7 +30,7 @@ function initHomepageDoodles() {
     const context = canvas.getContext("2d");
     if (!context) return;
 
-    const ink = "rgba(65, 108, 157, 0.56)";
+    const ink = "rgba(100, 155, 215, 0.65)";
     let pixelRatio = 1;
     let isDrawing = false;
     let lastPoint = null;
@@ -177,4 +178,29 @@ function initHomepageDoodles() {
 
     window.addEventListener("resize", prepareContext, { passive: true });
     prepareContext();
+}
+
+function initThemeToggle() {
+    const root = document.documentElement;
+    const buttons = document.querySelectorAll(".theme-toggle");
+    function apply(theme) {
+        root.dataset.theme = theme;
+        buttons.forEach(button => {
+            const label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+            button.setAttribute("aria-label", label);
+            button.title = label;
+            button.setAttribute("aria-pressed", String(theme === "dark"));
+        });
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.content = theme === "dark" ? "#141b24" : "#d8d5cd";
+    }
+    apply(root.dataset.theme === "dark" ? "dark" : "light");
+    buttons.forEach(button => button.addEventListener("click", () => {
+        const next = root.dataset.theme === "dark" ? "light" : "dark";
+        try { localStorage.setItem("portfolio-theme", next); } catch (_) {}
+        apply(next);
+    }));
+    window.addEventListener("storage", event => {
+        if (event.key === "portfolio-theme") apply(event.newValue === "dark" ? "dark" : "light");
+    });
 }

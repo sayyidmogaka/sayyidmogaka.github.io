@@ -558,3 +558,82 @@ p { margin: 0 0 20px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* Highlighted doctoral research availability */
+.phd-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin: 30px 0 34px;
+  padding: clamp(18px, 3vw, 25px);
+  border-left: 4px solid #16866b;
+  border-radius: 0 7px 7px 0;
+  background: rgba(20, 132, 102, .085);
+}
+.phd-handshake { width: 34px; height: 34px; flex: 0 0 34px; color: #12866b; margin-top: 3px; }
+.phd-callout h2 {
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+  color: #136d5a;
+  font-family: var(--condensed);
+  font-size: clamp(1.15rem, 1.85vw, 1.45rem);
+  letter-spacing: .045em;
+}
+.phd-callout p { margin: 0 0 12px; color: #263d59; line-height: 1.6; }
+.phd-callout a { color: #116c58; font-family: var(--condensed); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.phd-callout a:hover { color: #0d5144; }
+
+/* Click-to-reveal email address in the shared header */
+.header-social .email-reveal { position: relative; display: inline-flex; align-items: center; }
+.header-social .email-reveal summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 24px;
+  color: #4b5d75;
+  cursor: pointer;
+  list-style: none;
+}
+.header-social .email-reveal summary::-webkit-details-marker { display: none; }
+.header-social .email-reveal summary:hover,
+.header-social .email-reveal[open] summary { color: #17385e; }
+.header-social .email-reveal summary:focus-visible { outline: 2px solid #557da9; outline-offset: 3px; }
+.header-social .email-reveal summary svg { width: 20px; height: 20px; }
+.email-popover {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 15px);
+  right: -45px;
+  width: min(290px, calc(100vw - 24px));
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #eeeae3;
+  box-shadow: 0 10px 30px rgba(27,56,93,.16);
+  font-family: var(--sans);
+  line-height: 1.45;
+}
+.email-popover span, .email-popover small { display: block; color: #596e86; font-size: 12px; }
+.header-social .email-popover a {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin: 5px 0;
+  color: #17385e;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 700px) {
+  .email-popover { right: -45px; }
+}
+@media (max-width: 480px) {
+  .phd-callout { gap: 12px; padding: 16px; }
+  .phd-handshake { width: 27px; height: 27px; flex-basis: 27px; }
+  .email-popover { right: -42px; }
+}

@@ -1,0 +1,29 @@
+{
+  "dataset": "Model300",
+  "archive_sha256": "102a7a8a98d9b1de28c4ca1097f4e089273880258cb6475ceec7450b23111245",
+  "original_shape": [
+    300,
+    300,
+    300
+  ],
+  "slice_indices": [
+    0,
+    150,
+    299
+  ],
+  "crop_origin": [
+    0,
+    0,
+    0
+  ],
+  "crop_shape": [
+    48,
+    48,
+    48
+  ],
+  "crop_phase": "black assumed pore, encoded as 1",
+  "physical_voxel_size": null,
+  "lithology": null,
+  "external_acquisition_provenance": null,
+  "note": "User-supplied archive referenced by original thesis notebook. Only selected examples published."
+}
